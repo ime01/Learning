@@ -32,13 +32,61 @@ fun main(args: Array<String>){
    // use(abcd)
    // removeSlash()
     //usingForEach()
-    getHighestAndFrequency(listOf(5,9,8,3,5,8,9,0,4,9))
+    //getHighestAndFrequency(listOf(6, 8, 9, 0, 3, 4, 3, 6, 9, 6))
+
+    //println(highestBinaryGap(34))
+
+    println(mostFrequentElement(listOf(6, 8, 9, 0, 3, 4, 3, 6, 9, 6)))
 
 
 }
 
-//get highest element in an array and print the frequency
 
+//most frequent element in an array
+
+fun mostFrequentElement(array:List<Int>) {
+
+    var numberWithHighestFrequency = 0
+    val numbersAndFrequency = mutableMapOf<Int, Int>()
+
+    for ( numbers in array){
+        //val eachCount = array.count { numbers!=notNegative }
+        val eachCount = array.count { it==numbers }
+
+            numbersAndFrequency[numbers] = eachCount
+        }
+
+    val highestFrequency = numbersAndFrequency.values.maxOrNull()
+
+    for ((key, value) in numbersAndFrequency){
+        if (value== highestFrequency){
+            numberWithHighestFrequency = key
+        }
+    }
+    println("Number with Highest Frequency is $numberWithHighestFrequency and the frequency is ${numbersAndFrequency.values.maxOrNull()}")
+
+
+}
+
+
+//get the highest binary gap of a number
+
+fun highestBinaryGap(N: Int): Int {
+    // write your code in Kotlin 1.6.0 (Linux)
+
+    val binaryValues = Integer.toBinaryString(N)
+        .replace(Regex("0+$"), "")
+
+    val zerosOnly = binaryValues.split(Regex("1+"))
+
+    val lengths = zerosOnly.map( String::length)
+        .filter { it >0 }
+
+    return lengths.maxOrNull()!!.or(0)
+}
+
+
+//get highest element in an array and print the frequency
 fun getHighestAndFrequency(array:List<Int>){
     var count = 0
 
