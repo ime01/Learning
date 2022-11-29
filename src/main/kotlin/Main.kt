@@ -36,10 +36,122 @@ fun main(args: Array<String>){
 
     //println(highestBinaryGap(34))
 
-    println(mostFrequentElement(listOf(6, 8, 9, 0, 3, 4, 3, 6, 9, 6)))
+    //println(mostFrequentElement(listOf(6, 8, 9, 0, 3, 4, 3, 6, 9, 8, 100, 30, 10, 22, 99, 3, 4, 89, 30, 5, 6)))
+
+    //println(giveHighestElementAndFrequency(listOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)))
+
+    println(playingWithList())
 
 
 }
+
+
+fun playingWithList(){
+
+    val ourList = listOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
+
+    //break into bits
+    val chunkedBy4 = ourList.chunked(4)
+
+    //transform collection to single result
+    val result = ourList.reduce { result, item ->
+        result+item
+    }
+    println("Result is the sum of elements $result")
+
+
+    //check if all elements match a condition
+    data class User(val id: Int, val name: String, val isCricketLover: Boolean, val isFootballLover: Boolean)
+
+    val user1 = User(id = 1, name = "Amit", isCricketLover = true, isFootballLover = true)
+    val user2 = User(id = 2, name = "Ali", isCricketLover = true, isFootballLover = true)
+    val user3 = User(id = 3, name = "Sumit", isCricketLover = true, isFootballLover = false)
+    val user4 = User(id = 4, name = "Himanshu", isCricketLover = true, isFootballLover = false)
+
+    val ourusers = listOf(user1, user2, user3, user4)
+
+    val allLovesCricket = ourusers.all { it.isCricketLover }
+    println("All loves cricket $allLovesCricket")
+
+    val allLovesFootball = ourusers.all { it.isFootballLover }
+    println("All loves football $allLovesFootball")
+
+    //find an element based on a particular condition
+    val userId3 = ourusers.find { it.id==3 }
+    println("User with ID 3 is ${userId3?.name}")
+
+    //Associating the data using some key
+    val usersAssociatedWithId = ourusers.associateBy { it.id }
+    println("Users and Id $usersAssociatedWithId")
+
+    //removing duplicate elements
+    val noDuplicates = ourList.distinct()
+    println(noDuplicates)
+
+    //combine 2 lists while removing duplicates
+    val list2 = listOf(20, 4, 3, 22, 10, 7, 11, 10, 9, 6, 5, 11)
+    val combinedLiist = ourList.union(list2)
+    println("Combined List without duplicates $combinedLiist")
+
+    //Getting Intersection of elements ie elements which appear in 2 lists
+    val intersectingElements = ourList.intersect(list2)
+    println("Intersecting numbers = $intersectingElements")
+
+
+    //filter a collection based on some condition
+    val filteredList = ourList.filter { it % 2 ==0 }
+    //this gives even numbers only
+    println(filteredList)
+
+    //zip will pair items of 2 collections until the lasts pair that can be made
+    val listOne = listOf(1, 2, 3, 4, 5)
+    val listTwo = listOf("a", "b", "c", "d", "e", "f")
+    println(listOne zip listTwo) // [(1, a), (2, b), (3, c), (4, d), (5, e)]
+
+    //zip with next, will pair items based on the item next to it
+    val list = listOf(1, 2, 3, 4, 5)
+    println(list.zipWithNext())
+
+    //divide list into 2 based on a condition
+    val (footballLovers, nonFootballLovers)= ourusers.partition { it.isFootballLover }
+    println("Football Lovers $footballLovers")
+    println("Non Football Lovers $nonFootballLovers")
+
+    //groupBy based on some condition here it's remainder after diving by4
+    println(ourList.groupBy { it % 4 })
+
+    //sort elements of a collect by using sorted
+    println(ourList.sorted())
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+fun giveHighestElementAndFrequency(array:List<Int>){
+
+    var highestElementCount = 0
+
+    val highestElement = array.maxOrNull()
+
+    for ( numbers in array){
+
+         highestElementCount = array.count { it == highestElement }
+    }
+
+    println("highest Element is $highestElement, and the Frequency is $highestElementCount")
+
+}
+
+
 
 
 //most frequent element in an array
@@ -50,7 +162,7 @@ fun mostFrequentElement(array:List<Int>) {
     val numbersAndFrequency = mutableMapOf<Int, Int>()
 
     for ( numbers in array){
-        //val eachCount = array.count { numbers!=notNegative }
+       
         val eachCount = array.count { it==numbers }
 
             numbersAndFrequency[numbers] = eachCount
