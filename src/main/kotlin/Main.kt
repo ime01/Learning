@@ -120,8 +120,16 @@ fun playingWithList(){
     //groupBy based on some condition here it's remainder after diving by4
     println(ourList.groupBy { it % 4 })
 
-    //sort elements of a collect by using sorted
+    //sort elements of a collection by using sorted
     println(ourList.sorted())
+
+    //example return position of element
+    val searchValue =9
+    ourList.forEachIndexed { index, value ->
+        if (value==9){
+            println("2position of 9 is $index")
+        }
+    }
 
 
 
