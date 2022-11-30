@@ -107,14 +107,12 @@ fun binarySearchWithRecursion(searchingList: List<Int>, startPosition:Int, endPo
 
         var midPosition = startPosition + (endPosition - startPosition)/2
 
-        if (searchingList[midPosition]==keyToSearch){
-            return midPosition
-        }
-        else if (searchingList[midPosition] > keyToSearch){
-            return binarySearchWithRecursion(searchingList, startPosition,midPosition-1, keyToSearch)
-        }
-        else{
-            return binarySearchWithRecursion(searchingList, midPosition+1, endPosition, keyToSearch)
+        return if (searchingList[midPosition]==keyToSearch){
+            midPosition
+        } else if (searchingList[midPosition] > keyToSearch){
+            binarySearchWithRecursion(searchingList, startPosition,midPosition-1, keyToSearch)
+        } else{
+            binarySearchWithRecursion(searchingList, midPosition+1, endPosition, keyToSearch)
         }
     }
 
