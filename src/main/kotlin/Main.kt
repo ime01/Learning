@@ -40,10 +40,54 @@ fun main(args: Array<String>){
 
     //println(giveHighestElementAndFrequency(listOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)))
 
-    println(playingWithList())
+    //println(playingWithList())
+
+    val ourList = listOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
+    val ourList2 = arrayOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
+    val ourList3 = ourList2.sorted()
+    println(ourList3)
+    println(binarySearchKotlin(ourList3, 11))
 
 
 }
+
+fun binarySearchKotlin(array: List<Int>, key:Int){
+    var numOfElementS = array.size
+    var midPosition = 0
+    //right we don't know position of searched element so -1 is outside of elements index position of any list
+    var positionOfSearchedKey = -1
+    var startPosition = 0
+    var endPosition = numOfElementS
+
+    //implementing a binary search
+    while (startPosition<=endPosition){
+
+        midPosition = (startPosition+endPosition)/2
+
+        if (key==array[midPosition]){
+            positionOfSearchedKey = midPosition
+            break
+        }
+        else if (array[midPosition]<key){
+            startPosition = midPosition+1
+        }
+        else{
+            endPosition = midPosition-1
+        }
+    }
+    if (positionOfSearchedKey>=0){
+        println("The element searched for is found at position $positionOfSearchedKey")
+
+    }else{
+
+        println("Element searched for is not found at any position")
+    }
+
+
+
+}
+
+
 
 
 fun playingWithList(){
@@ -124,6 +168,7 @@ fun playingWithList(){
     println(ourList.sorted())
 
     //example return position of element
+    //LINEAR SEARCH
     val searchValue =9
     ourList.forEachIndexed { index, value ->
         if (value==9){
