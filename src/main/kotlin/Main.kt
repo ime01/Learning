@@ -45,7 +45,7 @@ fun main(args: Array<String>){
     val ourList = listOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
     val ourList2 = arrayOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
     val ourList3 = ourList2.sorted()
-    println(ourList2)
+    println(ourList3)
     println(binarySearchKotlin(ourList3, 9))
 
 
@@ -65,7 +65,11 @@ fun binarySearchKotlin(array: List<Int>, key:Int){
     //implementing a binary search
     while (startPosition<=endPosition){
 
-        midPosition = (startPosition+endPosition)/2
+        //use this one for safety
+        midPosition = startPosition + (endPosition-startPosition)/2
+
+        //this for large number sets might cause overflow
+       // midPosition = (startPosition+endPosition)/2
 
         if (key==array[midPosition]){
             positionOfSearchedKey = midPosition
@@ -85,6 +89,7 @@ fun binarySearchKotlin(array: List<Int>, key:Int){
 
         println("Element searched for is not found at any position")
     }
+
 
 
 
