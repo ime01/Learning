@@ -45,8 +45,16 @@ fun main(args: Array<String>){
     val ourList = listOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
     val ourList2 = arrayOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
     val ourList3 = ourList2.sorted()
-    println(ourList3)
-    println(binarySearchKotlin(ourList3, 9))
+    //println(ourList3)
+    //println(binarySearchKotlin(ourList3, 9))
+
+    val recursionBinarySearchResult = binarySearchWithRecursion(searchingList = ourList3, startPosition = 0, endPosition = ourList3.size, keyToSearch = 32)
+
+    if (recursionBinarySearchResult >-1){
+        println("Recursion binary search found searched number at position $recursionBinarySearchResult")
+    }else{
+        println("Recursion binary search did not find searched number")
+    }
 
 
 }
@@ -90,10 +98,36 @@ fun binarySearchKotlin(array: List<Int>, key:Int){
         println("Element searched for is not found at any position")
     }
 
+}
 
+//check if a number is in an array return the position of the number else return -1
+fun binarySearchWithRecursion(searchingList: List<Int>, startPosition:Int, endPosition:Int, keyToSearch:Int ):Int{
 
+    if (endPosition>=startPosition){
+
+        var midPosition = startPosition + (endPosition - startPosition)/2
+
+        if (searchingList[midPosition]==keyToSearch){
+            return midPosition
+        }
+        else if (searchingList[midPosition] > keyToSearch){
+            return binarySearchWithRecursion(searchingList, startPosition,midPosition-1, keyToSearch)
+        }
+        else{
+            return binarySearchWithRecursion(searchingList, midPosition+1, endPosition, keyToSearch)
+        }
+    }
+
+    return -1
 
 }
+
+
+
+
+
+
+
 
 
 
