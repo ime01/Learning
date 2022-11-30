@@ -68,7 +68,7 @@ fun binarySearchKotlin(array: List<Int>, key:Int){
         //use this one for safety
         midPosition = startPosition + (endPosition-startPosition)/2
 
-        //this for large number sets might cause overflow
+        //this for large number sets might cause integer overflow
        // midPosition = (startPosition+endPosition)/2
 
         if (key==array[midPosition]){
