@@ -45,19 +45,22 @@ fun main(args: Array<String>){
     val ourList = listOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
     val ourList2 = arrayOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
     val ourList3 = ourList2.sorted()
-    println(ourList3)
-    println(binarySearchKotlin(ourList3, 11))
+    println(ourList2)
+    println(binarySearchKotlin(ourList3, 9))
 
 
 }
 
 fun binarySearchKotlin(array: List<Int>, key:Int){
+
+    if (array.isEmpty()) println("Array Empty")
+
     var numOfElementS = array.size
     var midPosition = 0
     //right we don't know position of searched element so -1 is outside of elements index position of any list
     var positionOfSearchedKey = -1
     var startPosition = 0
-    var endPosition = numOfElementS
+    var endPosition = numOfElementS-1
 
     //implementing a binary search
     while (startPosition<=endPosition){
