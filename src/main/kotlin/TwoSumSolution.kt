@@ -12,6 +12,9 @@ fun main(args: Array<String>){
 fun twoSumSolution(numbers: List<Int>, target:Int): IntArray{
     // This applies to a sorted array in ascending order, leetcode question 167
 
+    //if question says array is not sorted before starting this lets sort the array first
+    val sortedlist = numbers.sorted().asReversed()
+
     var result = mutableListOf<Int>()
     var left = 0
     var right = numbers.size-1
