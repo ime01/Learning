@@ -42,22 +42,130 @@ fun main(args: Array<String>){
 
     //println(playingWithList())
 
-    val ourList = listOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
-    val ourList2 = arrayOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
-    val ourList3 = ourList2.sorted()
+    //val ourList = listOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
+    //ourList.reversed()
+
+   // for(num in ourList.indices){
+        //println(num + (num+1))
+       // println(ourList[num] + ourList[num+1])
+    //}
+   /* ourList.forEachIndexed { index, value ->
+
+        println(ourList[index] + ourList[index-1])
+
+    }*/
+
+   // println(playingWithList())
+
+
+    //val ourList = listOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
+    //val ourList2 = arrayOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
+    //val ourList3 = ourList2.sorted()
     //println(ourList3)
     //println(binarySearchKotlin(ourList3, 9))
 
-    val recursionBinarySearchResult = binarySearchWithRecursion(searchingList = ourList3, startPosition = 0, endPosition = ourList3.size, keyToSearch = 32)
+    /*val recursionBinarySearchResult = binarySearchWithRecursion(searchingList = ourList3, startPosition = 0, endPosition = ourList3.size, keyToSearch = 32)
 
     if (recursionBinarySearchResult >-1){
         println("Recursion binary search found searched number at position $recursionBinarySearchResult")
     }else{
         println("Recursion binary search did not find searched number")
+    }*/
+
+
+   // val sortedList = searchLessonList.sorted()
+   // val setOfTheList = searchLessonList.toSet()
+    //val distinctList = searchLessonList.distinct()
+
+    //println(lowestTimes)
+
+   // println(normalLinearSearch(searchLessonList, 0))
+    //println(binarySearchIterative(sortedList, 44))
+    //println(binarySearchRecursive(sortedList,0, sortedList.size-1, 44))
+
+    /*val repeat = repeat(4){index->
+        println("The index is $index")
+    }*/
+
+}
+
+//SEARCH
+fun normalLinearSearch(ourList: List<Int>, searchedKey:Int):Int{
+    var positionOfElement = -1
+
+    ourList.forEachIndexed { index, element ->
+
+        if (element==searchedKey){
+            positionOfElement = index
+        }
+    }
+
+    return positionOfElement
+}
+
+//Binary Search Kotlin Recursive Approach
+fun binarySearchRecursive(ourList:List<Int>, startPosition: Int, endPosition: Int, searchedKey:Int):Int{
+
+    if (endPosition>=startPosition){
+
+    var midPosition = startPosition + (endPosition-startPosition)/2
+
+    return if (ourList[midPosition] == searchedKey){
+
+        midPosition
+
+    }else if (ourList[midPosition] > searchedKey){
+
+        binarySearchRecursive(ourList, startPosition, midPosition-1, searchedKey)
+
+    }else{
+
+        binarySearchRecursive(ourList, midPosition+1, endPosition, searchedKey)
     }
 
 
+    }
+
+    return -1
 }
+
+
+
+//Binary Search Kotlin Iterative
+fun binarySearchIterative(ourList:List<Int>, searchedKey:Int){
+
+    if (ourList.isEmpty()) print("Array is empty")
+
+    var startPosition = 0
+    var numOfElements = ourList.size
+    var midPosition = 0
+    var endPosition = numOfElements-1
+    var positionOfSearchedKey = -1
+
+    while (startPosition<=endPosition){
+    midPosition = startPosition + (endPosition-startPosition)/2
+
+    if (searchedKey==ourList[midPosition]){
+        positionOfSearchedKey = midPosition
+        break
+    }
+    else if (ourList[midPosition]<searchedKey){
+
+        startPosition = midPosition+1
+    }else{
+        endPosition = midPosition-1
+    }
+    }
+
+    if (positionOfSearchedKey>=0){
+        println("The element searched for is found at position $positionOfSearchedKey")
+    }else{
+        println("The element searched for is not found in this list ")
+    }
+
+}
+
+
 
 fun binarySearchKotlin(array: List<Int>, key:Int){
 
@@ -122,17 +230,17 @@ fun binarySearchWithRecursion(searchingList: List<Int>, startPosition:Int, endPo
 
 
 
-
-
-
-
-
-
-
-
 fun playingWithList(){
 
     val ourList = listOf(11, 22, 32, 11, 2, 14, 22, 11, 9, 16, 5, 6, 31, 3)
+
+    for(num in ourList){
+        println(num)
+    }
+
+
+
+    var myList = mutableListOf<Int>()
 
     //break into bits
     val chunkedBy4 = ourList.chunked(4)
@@ -144,6 +252,25 @@ fun playingWithList(){
     println("Result is the sum of elements $result")
 
 
+    val searchLessonList = listOf(1,3,8,99, 30, 20, 0, 5, 6, 0,67, 20, 44, 55, 67, 87,9, 59, 22,10)
+    searchLessonList.distinct().sorted()
+
+    val  element1Count = searchLessonList.count { it-> it == 20}
+    val  element2Count = searchLessonList.count { it-> it == 20}
+
+    val g =5
+
+    for (num in 1..g){
+        println(num)
+    }
+
+    val lowestTimes = minOf(element1Count, element2Count)
+
+    val repeat = repeat(4){count->
+        println(count)
+    }
+
+
     //check if all elements match a condition
     data class User(val id: Int, val name: String, val isCricketLover: Boolean, val isFootballLover: Boolean)
 
@@ -153,6 +280,12 @@ fun playingWithList(){
     val user4 = User(id = 4, name = "Himanshu", isCricketLover = true, isFootballLover = false)
 
     val ourusers = listOf(user1, user2, user3, user4)
+
+    val onlyNames = ourusers.map {
+        it.name
+    }
+
+    println("THE NAMES ARE  $onlyNames")
 
     val allLovesCricket = ourusers.all { it.isCricketLover }
     println("All loves cricket $allLovesCricket")
@@ -173,13 +306,22 @@ fun playingWithList(){
     println(noDuplicates)
 
     //combine 2 lists while removing duplicates
-    val list2 = listOf(20, 4, 3, 22, 10, 7, 11, 10, 9, 6, 5, 11)
+    val list2 = listOf(20, 4, 3, 22, 10, 7, 11, 10, 3, 9, 6, 5, 11)
     val combinedLiist = ourList.union(list2)
     println("Combined List without duplicates $combinedLiist")
 
     //Getting Intersection of elements ie elements which appear in 2 lists
+    val myIntArray1 = intArrayOf(20, 4, 3, 22, 10, 7, 11, 10, 3, 9, 6, 5, 11)
+    val myIntArray2 = intArrayOf(20, 50, 66, 79, 4, 3, 22, 50, 3, 33, 10, 7, 11, 10, 66, 44, 29, 6, 5, 11)
+    myIntArray1.sorted()
+    val a = mutableMapOf<Int, Int>()
+
+
+
     val intersectingElements = ourList.intersect(list2)
+    val intersectingElements2 = myIntArray1.intersect(myIntArray2.toList())
     println("Intersecting numbers = $intersectingElements")
+    println("Intersecting numbers2 = ${intersectingElements2.toIntArray()}")
 
 
     //filter a collection based on some condition
@@ -194,6 +336,10 @@ fun playingWithList(){
 
     //zip with next, will pair items based on the item next to it
     val list = listOf(1, 2, 3, 4, 5)
+    val ag =list.toMutableList()
+    ag.count { it-> it ==5 }
+    ag.removeAt(0)
+
     println(list.zipWithNext())
 
     //divide list into 2 based on a condition
@@ -215,9 +361,6 @@ fun playingWithList(){
             println("2position of 9 is $index")
         }
     }
-
-
-
 
 
 
